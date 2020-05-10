@@ -162,7 +162,7 @@ objectdef obj_Miner
 			{
 				;	If we're at our panic location bookmark and HARD STOP has been called for, just idle until user intervention
 				if ${This.AtPanicBookmark}
-				{	
+				{
 					This.CurrentState:Set["IDLE"]
 					return
 				}
@@ -187,13 +187,13 @@ objectdef obj_Miner
 					This.CurrentState:Set["IDLE"]
 					return
 				}
-			
+
 				if ${This.AtPanicBookmark}
 				{
 					This.CurrentState:Set["IDLE"]
 					return
 				}
-				
+
 				This.CurrentState:Set["FLEE"]
 				UI:UpdateConsole["FLEE: Low Standing player or system unsafe, fleeing"]
 				return
@@ -229,7 +229,7 @@ objectdef obj_Miner
 		{
 			if ${Config.Miner.DeliveryLocationTypeName.Equal["Orca"]}
 			{
-				if !${WarpToOrca} 
+				if !${WarpToOrca}
 				{
 					if ${This.AtPanicBookmark}
 					{
@@ -361,6 +361,12 @@ objectdef obj_Miner
 					break
 				}
 				Ship.Drones:ReturnAllToDroneBay
+
+				if ${Config.Miner.OrcaMode}
+				{
+					Ship:Deactivate_Gang_Links
+				}
+
 				if ${EVE.Bookmark[${Config.Miner.PanicLocation}](exists)} && ${EVE.Bookmark[${Config.Miner.PanicLocation}].SolarSystemID} == ${Me.SolarSystemID}
 				{
 					if ${EVE.Bookmark[${Config.Miner.PanicLocation}](exists)} && ${EVE.Bookmark[${Config.Miner.PanicLocation}].TypeID} != 5
@@ -423,7 +429,14 @@ objectdef obj_Miner
 				{
 					break
 				}
+
 				Ship.Drones:ReturnAllToDroneBay
+
+				if ${Config.Miner.OrcaMode}
+				{
+					Ship:Deactivate_Gang_Links
+				}
+
 				if ${EVE.Bookmark[${Config.Miner.DeliveryLocation}](exists)} && ${EVE.Bookmark[${Config.Miner.DeliveryLocation}].SolarSystemID} == ${Me.SolarSystemID}
 				{
 					if ${Config.Miner.BookMarkLastPosition} && !${Bookmarks.CheckForStoredLocation}
@@ -579,6 +592,11 @@ objectdef obj_Miner
 
 						;	Get info about the crystals currently loaded
 						call Ship.SetActiveCrystals
+
+						if ${Config.Miner.OrcaMode}
+						{
+							Ship:Deactivate_Gang_Links
+						}
 
 						if ${EVE.Bookmark[${Config.Miner.DeliveryLocation}](exists)} && ${EVE.Bookmark[${Config.Miner.DeliveryLocation}].SolarSystemID} != ${Me.SolarSystemID}
 						{

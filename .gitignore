@@ -4,3 +4,6 @@
 _ActiveModules.iss
 *.log
 /Testcases/**/lstypes*.txt
+Branches/Stable/config/*.xml
+Branches/Stable/config/*.txt
+*.cache

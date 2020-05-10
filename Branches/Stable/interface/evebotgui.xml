@@ -543,6 +543,16 @@
 								This:SetSelection[${Script[EVEBot].VariableScope.Config.Miner.JetCanNaming}]
 							</OnLoad>
 						</combobox>
+						<Button name="cbOrePriorityButton" template='EveSkin.Window.ClickButton'>
+							<X>200</X>
+							<Y>87</Y>
+							<Width>150</Width>
+							<Height>20</Height>
+							<Text>Ore Priority</Text>
+							<OnLeftClick>
+								run EVEBot/External/OrePriority/orepriority.iss
+							</OnLeftClick>
+						</Button>
 						<checkbox Name='cbDistributeLasers'>
 							<X>10</X>
 							<Y>50</Y>
