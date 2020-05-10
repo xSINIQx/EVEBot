@@ -619,6 +619,10 @@ objectdef obj_Miner
 					;	*	If our delivery location is in the same system, warp there and unload
 					;	*	If the above didn't work, panic so the user knows to correct their configuration and try again.
 					case Hangar Array
+						if ${Config.Miner.OrcaMode}
+						{
+							Ship:Deactivate_Gang_Links
+						}
 						if ${EVE.Bookmark[${Config.Miner.DeliveryLocation}](exists)} && ${EVE.Bookmark[${Config.Miner.DeliveryLocation}].SolarSystemID} != ${Me.SolarSystemID}
 						{
 							call Ship.TravelToSystem ${EVE.Bookmark[${Config.Miner.DeliveryLocation}].SolarSystemID}
